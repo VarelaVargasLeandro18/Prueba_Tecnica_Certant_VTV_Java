@@ -19,13 +19,15 @@ public class Inspector extends Persona {
     @Column(name="contrasenia", nullable=false)
     private String Contrasenia;
 
-    public Inspector(String Usuario, String Contrasenia, int CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
+    public Inspector() {}
+    
+    public Inspector(String Usuario, String Contrasenia, Long CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
         super(CUIL, nombre, apellido, fechaNac, email, NroTelefono);
         this.Usuario = Usuario;
         this.Contrasenia = Contrasenia;
     }
 
-    // <editor-fold desc="Getters">
+    // <editor-fold desc="Getters" defaultState="collapsed">
     public String getUsuario() {
         return Usuario;
     }

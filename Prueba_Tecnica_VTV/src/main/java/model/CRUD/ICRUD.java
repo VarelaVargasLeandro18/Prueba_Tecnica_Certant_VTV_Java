@@ -34,6 +34,12 @@ public interface ICRUD<T, K> {
      * @param updated
      * @return entidad actualizada.
      */
-    public T updateOne ( T updated );
+    public T update ( T updated );
+    
+    /**
+     * Crea una entidad.
+     * @param created 
+     */
+    public void create ( T created );
     
 }

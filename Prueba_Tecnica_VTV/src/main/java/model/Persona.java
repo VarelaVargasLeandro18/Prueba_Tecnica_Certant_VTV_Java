@@ -14,7 +14,7 @@ import javax.persistence.Column;
 public abstract class Persona {
     
     @Id
-    private int CUIL;
+    private Long CUIL;
     
     @Column(name="nombre", nullable=false)
     private String nombre;
@@ -30,8 +30,10 @@ public abstract class Persona {
     
     @Column(name="nro_telefono", nullable=false)
     private String NroTelefono;
+    
+    public Persona() {}
 
-    public Persona(int CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
+    public Persona(Long CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
         this.CUIL = CUIL;
         this.nombre = nombre;
         this.apellido = apellido;

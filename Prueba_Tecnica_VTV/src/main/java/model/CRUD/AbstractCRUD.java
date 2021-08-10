@@ -60,13 +60,22 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
 
     @Override
     public void delete(T entity) {
-        this.getEntityManager().merge(entity);
+        this.getEntityManager().getTransaction().begin();
+        entity = this.getEntityManager().merge(entity);
         this.getEntityManager().remove(entity);
+        this.getEntityManager().getTransaction().commit();
     }
 
     @Override
-    public T updateOne(T updated) {
+    public T update(T updated) {
         return this.getEntityManager().merge(updated);
+    }
+    
+    @Override
+    public void create( T created ) {
+        this.getEntityManager().getTransaction().begin();
+        this.getEntityManager().persist(created);
+        this.getEntityManager().getTransaction().commit();
     }
     
 }
