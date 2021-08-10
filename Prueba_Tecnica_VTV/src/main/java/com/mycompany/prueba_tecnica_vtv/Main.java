@@ -17,13 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) { 
+        System.out.print( (new Inspector( "usr", "pass", 9l, "Nombre", "Ape", LocalDateTime.now(), "email", "nro" )).toString() );
     }
     
 }
-/*
-public Inspector(String Usuario, String Contrasenia, int CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
-        super(CUIL, nombre, apellido, fechaNac, email, NroTelefono);
-        this.Usuario = Usuario;
-        this.Contrasenia = Contrasenia;
-    }
-*/

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import org.json.JSONObject;
 
 /**
  *
@@ -43,7 +44,7 @@ public abstract class Persona {
     }
 
     // <editor-fold desc="Getters" defaultstate="collapsed">
-    public int getCUIL() {
+    public Long getCUIL() {
         return CUIL;
     }
 
@@ -67,5 +68,19 @@ public abstract class Persona {
         return NroTelefono;
     }
     // </editor-fold>
+    
+    @Override
+    public String toString() {
+        JSONObject json = new JSONObject();
+        
+        json.put( "CUIL" , this.CUIL );
+        json.put( "Nombre" , this.nombre );
+        json.put( "Apellido" , this.nombre );
+        json.put( "Fecha_Nacimiento" , this.nombre );
+        json.put( "Email" , this.nombre );
+        json.put( "Nro_Telefono" , this.nombre );
+        
+        return json.toString(4);
+    }
     
 }
