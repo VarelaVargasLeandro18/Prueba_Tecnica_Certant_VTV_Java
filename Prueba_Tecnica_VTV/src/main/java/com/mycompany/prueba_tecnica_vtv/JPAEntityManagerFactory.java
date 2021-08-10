@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author bapo
+ * @author Varela Vargas Leandro Gastón
  */
 public class JPAEntityManagerFactory {
     
