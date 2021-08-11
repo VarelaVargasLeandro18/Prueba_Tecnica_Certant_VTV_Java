@@ -1,4 +1,4 @@
-package model;
+package model.personas;
 
 import java.time.LocalDateTime;
 

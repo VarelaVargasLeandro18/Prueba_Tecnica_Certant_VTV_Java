@@ -1,5 +1,6 @@
 package model.CRUD;
 
+import com.mycompany.prueba_tecnica_vtv.JPAEntityManagerFactory;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,7 +19,9 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
         this.entityClass = entityClass;
     }
     
-    protected abstract EntityManager getEntityManager();
+    protected EntityManager getEntityManager() {
+        return JPAEntityManagerFactory.getEntityManager();
+    }
 
     @Override
     public T readOne(K id) {

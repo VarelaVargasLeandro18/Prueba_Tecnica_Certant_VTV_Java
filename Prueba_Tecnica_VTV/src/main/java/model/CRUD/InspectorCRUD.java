@@ -1,8 +1,6 @@
 package model.CRUD;
 
-import com.mycompany.prueba_tecnica_vtv.JPAEntityManagerFactory;
-import javax.persistence.EntityManager;
-import model.Inspector;
+import model.personas.Inspector;
 
 /**
  *
@@ -12,11 +10,6 @@ public class InspectorCRUD extends AbstractCRUD<Inspector, Long>{
 
     public InspectorCRUD() {
         super(Inspector.class);
-    }
-    
-    @Override
-    protected EntityManager getEntityManager() {
-        return JPAEntityManagerFactory.getEntityManager();
     }
         
 }
