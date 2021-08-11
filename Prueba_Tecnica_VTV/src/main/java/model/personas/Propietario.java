@@ -2,6 +2,7 @@ package model.personas;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -44,6 +45,24 @@ public class Propietario extends Persona implements Serializable {
         json.put("tipo", this.tipo.toString());
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.tipo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) 
+            return false;
+        final Propietario other = (Propietario) obj;
+        if (!Objects.equals(this.tipo, other.tipo)) {
+            return false;
+        }
+        return true;
     }
     
 }

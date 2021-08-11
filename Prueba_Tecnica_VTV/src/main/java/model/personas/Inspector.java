@@ -2,6 +2,7 @@ package model.personas;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -48,6 +49,28 @@ public class Inspector extends Persona implements Serializable {
         json.put( "contrasenia", this.contrasenia );
         
         return json.toString(4);        
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.usuario);
+        hash = 97 * hash + Objects.hashCode(this.contrasenia);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ( !super.equals(obj) )
+            return false;
+        final Inspector other = (Inspector) obj;
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasenia, other.contrasenia)) {
+            return false;
+        }
+        return true;
     }
      
 }

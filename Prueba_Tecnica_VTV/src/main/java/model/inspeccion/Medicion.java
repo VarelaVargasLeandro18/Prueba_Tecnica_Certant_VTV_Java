@@ -1,6 +1,7 @@
 package model.inspeccion;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -107,6 +108,47 @@ public class Medicion implements Serializable {
         json.put( "trenDelantero", this.trenDelantero );
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.Id);
+        hash = 41 * hash + Objects.hashCode(this.sistemaDeFrenos);
+        hash = 41 * hash + Objects.hashCode(this.suspension);
+        hash = 41 * hash + Objects.hashCode(this.direccion);
+        hash = 41 * hash + Objects.hashCode(this.trenDelantero);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medicion other = (Medicion) obj;
+        if (!Objects.equals(this.Id, other.Id)) {
+            return false;
+        }
+        if (!Objects.equals(this.sistemaDeFrenos, other.sistemaDeFrenos)) {
+            return false;
+        }
+        if (!Objects.equals(this.suspension, other.suspension)) {
+            return false;
+        }
+        if (!Objects.equals(this.direccion, other.direccion)) {
+            return false;
+        }
+        if (!Objects.equals(this.trenDelantero, other.trenDelantero)) {
+            return false;
+        }
+        return true;
     }
     
 }

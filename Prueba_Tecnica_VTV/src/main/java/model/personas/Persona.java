@@ -1,6 +1,7 @@
 package model.personas;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Id;
@@ -81,6 +82,51 @@ public abstract class Persona {
         json.put( "Nro_Telefono" , this.nombre );
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.CUIL);
+        hash = 37 * hash + Objects.hashCode(this.nombre);
+        hash = 37 * hash + Objects.hashCode(this.apellido);
+        hash = 37 * hash + Objects.hashCode(this.fechaNac);
+        hash = 37 * hash + Objects.hashCode(this.email);
+        hash = 37 * hash + Objects.hashCode(this.NroTelefono);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Persona other = (Persona) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido, other.apellido)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.NroTelefono, other.NroTelefono)) {
+            return false;
+        }
+        if (!Objects.equals(this.CUIL, other.CUIL)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaNac, other.fechaNac)) {
+            return false;
+        }
+        return true;
     }
     
 }

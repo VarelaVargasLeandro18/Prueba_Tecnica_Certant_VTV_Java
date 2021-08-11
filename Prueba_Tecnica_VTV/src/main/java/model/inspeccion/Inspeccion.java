@@ -2,6 +2,7 @@ package model.inspeccion;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -154,6 +155,59 @@ public class Inspeccion implements Serializable {
         json.put( "Medicion", this.medicion );
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.numero);
+        hash = 83 * hash + Objects.hashCode(this.fecha);
+        hash = 83 * hash + Objects.hashCode(this.estado);
+        hash = 83 * hash + Objects.hashCode(this.tipo);
+        hash = 83 * hash + Objects.hashCode(this.inspector);
+        hash = 83 * hash + Objects.hashCode(this.inspeccionado);
+        hash = 83 * hash + Objects.hashCode(this.observacion);
+        hash = 83 * hash + Objects.hashCode(this.medicion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Inspeccion other = (Inspeccion) obj;
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipo, other.tipo)) {
+            return false;
+        }
+        if (!Objects.equals(this.inspector, other.inspector)) {
+            return false;
+        }
+        if (!Objects.equals(this.inspeccionado, other.inspeccionado)) {
+            return false;
+        }
+        if (!Objects.equals(this.observacion, other.observacion)) {
+            return false;
+        }
+        if (!Objects.equals(this.medicion, other.medicion)) {
+            return false;
+        }
+        return true;
     }
     
 }

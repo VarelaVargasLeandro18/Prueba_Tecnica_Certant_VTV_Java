@@ -2,6 +2,7 @@ package model;
 
 import model.personas.Propietario;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -70,6 +71,43 @@ public class Auto implements Serializable {
         json.put( "Propietario", this.propietario.toString() );
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.dominio);
+        hash = 67 * hash + Objects.hashCode(this.marca);
+        hash = 67 * hash + Objects.hashCode(this.modelo);
+        hash = 67 * hash + Objects.hashCode(this.propietario);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Auto other = (Auto) obj;
+        if (!Objects.equals(this.dominio, other.dominio)) {
+            return false;
+        }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.propietario, other.propietario)) {
+            return false;
+        }
+        return true;
     }
     
 }

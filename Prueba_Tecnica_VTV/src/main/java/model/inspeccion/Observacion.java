@@ -1,6 +1,7 @@
 package model.inspeccion;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -152,6 +153,59 @@ public class Observacion implements Serializable {
         json.put( "emergencia", this.emergencia );
         
         return json.toString(4);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.Id);
+        hash = 71 * hash + Objects.hashCode(this.luces);
+        hash = 71 * hash + Objects.hashCode(this.patente);
+        hash = 71 * hash + Objects.hashCode(this.espejos);
+        hash = 71 * hash + Objects.hashCode(this.chasis);
+        hash = 71 * hash + Objects.hashCode(this.vidrios);
+        hash = 71 * hash + Objects.hashCode(this.seguridad);
+        hash = 71 * hash + Objects.hashCode(this.emergencia);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Observacion other = (Observacion) obj;
+        if (!Objects.equals(this.Id, other.Id)) {
+            return false;
+        }
+        if (!Objects.equals(this.luces, other.luces)) {
+            return false;
+        }
+        if (!Objects.equals(this.patente, other.patente)) {
+            return false;
+        }
+        if (!Objects.equals(this.espejos, other.espejos)) {
+            return false;
+        }
+        if (!Objects.equals(this.chasis, other.chasis)) {
+            return false;
+        }
+        if (!Objects.equals(this.vidrios, other.vidrios)) {
+            return false;
+        }
+        if (!Objects.equals(this.seguridad, other.seguridad)) {
+            return false;
+        }
+        if (!Objects.equals(this.emergencia, other.emergencia)) {
+            return false;
+        }
+        return true;
     }
     
 }
