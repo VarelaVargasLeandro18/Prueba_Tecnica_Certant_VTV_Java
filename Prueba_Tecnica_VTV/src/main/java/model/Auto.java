@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import org.json.JSONObject;
@@ -31,7 +32,7 @@ public class Auto implements Serializable {
     private String modelo;
     
     @ManyToOne(optional=false, targetEntity=Propietario.class)
-    @JoinColumn(name="propietario_CUIL", referencedColumnName="CUIL")
+    @JoinColumn(name="propietario_CUIL", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Propietario"))
     private Propietario propietario;
     
     public Auto() {}

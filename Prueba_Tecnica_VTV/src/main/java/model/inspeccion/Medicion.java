@@ -3,6 +3,7 @@ package model.inspeccion;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,19 +23,19 @@ public class Medicion implements Serializable {
     private Long Id;
     
     @ManyToOne
-    @JoinColumn(name="sist_de_frenos", referencedColumnName="Id")
+    @JoinColumn(name="sist_de_frenos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_SistDeFrenos"))
     private EstadoInspeccion sistemaDeFrenos;
     
     @ManyToOne
-    @JoinColumn(name="suspension", referencedColumnName="Id")
+    @JoinColumn(name="suspension", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Suspension"))
     private EstadoInspeccion suspension;
     
     @ManyToOne
-    @JoinColumn(name="direccion", referencedColumnName="Id")
+    @JoinColumn(name="direccion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Direccion"))
     private EstadoInspeccion direccion;
     
     @ManyToOne
-    @JoinColumn(name="tren_delantero", referencedColumnName="Id")
+    @JoinColumn(name="tren_delantero", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_TrenDelantero"))
     private EstadoInspeccion trenDelantero;
 
     public Medicion() {

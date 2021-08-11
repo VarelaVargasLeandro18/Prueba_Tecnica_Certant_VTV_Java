@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,7 +19,7 @@ import org.json.JSONObject;
 public class Propietario extends Persona implements Serializable {
     
     @OneToOne
-    @JoinColumn(name="tipo", referencedColumnName="Id")
+    @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Tipo"))
     private TipoPropietario tipo;
 
     public Propietario() {

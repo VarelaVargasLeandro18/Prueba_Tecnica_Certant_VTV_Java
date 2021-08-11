@@ -2,7 +2,9 @@ package model.inspeccion;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,31 +24,31 @@ public class Observacion implements Serializable {
     private Long Id;
     
     @ManyToOne
-    @JoinColumn(name="luces", referencedColumnName="Id")
+    @JoinColumn(name="luces", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Luces"))
     private EstadoInspeccion luces;
     
     @ManyToOne
-    @JoinColumn(name="patente", referencedColumnName="Id")
+    @JoinColumn(name="patente", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Patente"))
     private EstadoInspeccion patente;
     
     @ManyToOne
-    @JoinColumn(name="espejos", referencedColumnName="Id")
+    @JoinColumn(name="espejos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Espejos"))
     private EstadoInspeccion espejos;
     
     @ManyToOne
-    @JoinColumn(name="chasis", referencedColumnName="Id")
+    @JoinColumn(name="chasis", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Chasis"))
     private EstadoInspeccion chasis;
     
     @ManyToOne
-    @JoinColumn(name="vidrios", referencedColumnName="Id")
+    @JoinColumn(name="vidrios", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Vidrios"))
     private EstadoInspeccion vidrios;
     
     @ManyToOne
-    @JoinColumn(name="seguridad", referencedColumnName="Id")
+    @JoinColumn(name="seguridad", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Seguridad"))
     private EstadoInspeccion seguridad;
     
     @ManyToOne
-    @JoinColumn(name="emergencia", referencedColumnName="Id")
+    @JoinColumn(name="emergencia", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Emergencia"))
     private EstadoInspeccion emergencia;
 
     public Observacion() {

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,27 +31,27 @@ public class Inspeccion implements Serializable {
     private LocalDateTime fecha;
     
     @ManyToOne
-    @JoinColumn(name="estado", referencedColumnName="Id")
+    @JoinColumn(name="estado", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Estado"))
     private EstadoInspeccion estado;
     
     @ManyToOne
-    @JoinColumn(name="exento", referencedColumnName="tipo")
+    @JoinColumn(name="exento", referencedColumnName="tipo", foreignKey=@ForeignKey(name="FK_Tipo"))
     private TipoPropietario tipo;
     
     @ManyToOne
-    @JoinColumn(name="inspector", referencedColumnName="CUIL")
+    @JoinColumn(name="inspector", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Inspector"))
     private Inspector inspector;
     
     @ManyToOne
-    @JoinColumn(name="auto_inspeccionado", referencedColumnName="dominio")
+    @JoinColumn(name="auto_inspeccionado", referencedColumnName="dominio", foreignKey=@ForeignKey(name="FK_Auto"))
     private Auto inspeccionado;
     
     @ManyToOne
-    @JoinColumn(name="observacion", referencedColumnName="Id")
+    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"))
     private Observacion observacion;
     
     @ManyToOne
-    @JoinColumn(name="medicion", referencedColumnName="Id")
+    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"))
     private Medicion medicion;
 
     public Inspeccion() {
