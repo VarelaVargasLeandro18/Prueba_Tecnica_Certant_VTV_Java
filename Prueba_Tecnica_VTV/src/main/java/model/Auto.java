@@ -19,7 +19,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="AUTOMOVILES")
-public class Auto implements Serializable {
+public final class Auto implements Serializable {
     
     @Id
     @Column(name="dominio")
