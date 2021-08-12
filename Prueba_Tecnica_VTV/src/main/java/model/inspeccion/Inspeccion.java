@@ -57,8 +57,7 @@ public class Inspeccion implements Serializable {
     @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"))
     private Medicion medicion;
 
-    public Inspeccion() {
-    }
+    public Inspeccion() {}
 
     public Inspeccion(LocalDateTime fecha, EstadoInspeccion estado, TipoPropietario tipo, Inspector inspector, Auto inspeccionado, Observacion observacion, Medicion medicion) {
         this.fecha = fecha;

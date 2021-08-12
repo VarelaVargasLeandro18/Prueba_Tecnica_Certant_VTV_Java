@@ -67,6 +67,7 @@ public class TestCRUD {
     //</editor-fold>
     
     // <editor-fold desc="Tests">
+    //<editor-fold desc="Exception" defaultstate="collapsed">
     @Test
     @DisplayName("Forzado de ReadEntityException")
     public void readEntityException() {
@@ -106,6 +107,7 @@ public class TestCRUD {
         
         assertTrue(createEx instanceof CreateEntityException);
     }
+    //</editor-fold>
     
     @Test
     @DisplayName("Creación de TipoPropietario en BBDD")

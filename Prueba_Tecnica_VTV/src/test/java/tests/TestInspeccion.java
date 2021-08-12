@@ -23,6 +23,7 @@ import model.personas.Propietario;
 import model.personas.TipoPropietario;
  
 import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -51,6 +52,10 @@ public class TestInspeccion {
     private Inspeccion inspeccion;
     private Medicion medicion;
     private Observacion observacion;
+    private EstadoInspeccion apto;
+    private EstadoInspeccion condicional;
+    private EstadoInspeccion rechazado;
+    private EstadoInspeccion enProceso;
     
     //<editor-fold desc="BeforeAll creación previa de entidades necesarias." defaultstate="collapsed">
     @BeforeAll
@@ -129,6 +134,36 @@ public class TestInspeccion {
            fail(ex);
        }
     }
+    
+    @BeforeAll
+    public void creacionEstadosInspeccion () {
+        try {
+            this.estadoInspeccionCRUD = new EstadoInspeccionCRUD();
+            
+            if ( ( this.apto = this.estadoInspeccionCRUD.leerPorEstado("Apto") ) == null ) {
+                this.apto = new EstadoInspeccion("Apto");
+                this.estadoInspeccionCRUD.create(this.apto);
+            }
+            
+            if ( ( this.condicional = this.estadoInspeccionCRUD.leerPorEstado("Condicional") ) == null ) {
+                this.condicional = new EstadoInspeccion("Condicional");
+                this.estadoInspeccionCRUD.create(this.condicional);
+            }
+            
+            if ( ( this.rechazado = this.estadoInspeccionCRUD.leerPorEstado("Rechazado") ) == null ) {
+                this.rechazado = new EstadoInspeccion("Rechazado");
+                this.estadoInspeccionCRUD.create(this.rechazado);
+            }
+            
+            if ( ( this.enProceso = this.estadoInspeccionCRUD.leerPorEstado("En Proceso") ) == null ) {
+                this.enProceso = new EstadoInspeccion("En Proceso");
+                this.estadoInspeccionCRUD.create(this.enProceso);
+            }
+            
+        } catch ( CreateEntityException ex ) {
+            fail(ex);
+        }      
+    }
     // </editor-fold>
     
     // <editor-fold desc="Tests">
@@ -137,15 +172,31 @@ public class TestInspeccion {
     public void empezarInspeccion() {
         
         try {
-            this.estadoInspeccionCRUD = new EstadoInspeccionCRUD();
+            this.inspeccionCRUD = new InspeccionCRUD();
+            this.inspeccion = new Inspeccion(
+                    LocalDateTime.now(),
+                    this.enProceso,
+                    this.tipoPropietario,
+                    this.inspector,
+                    this.autoUno,
+                    null,
+                    null
+            );
             
-            if ( this.estadoInspeccionCRUD.leerPorEstado("Exento") == null )
-                this.estadoInspeccionCRUD.create( new EstadoInspeccion( "Exento" ) );
+            this.inspeccionCRUD.create( this.inspeccion );
             
-            
+            assertNotNull( this.inspeccion.getNumero() );
         } catch ( CreateEntityException ex ) {
             fail(ex);
         }
+        
+    }
+    
+    @Test
+    @DisplayName("Creacion de Observacion y Medicion")
+    public void crearObservacionYMedicion() {
+        
+        
         
     }
     //</editor-fold>
