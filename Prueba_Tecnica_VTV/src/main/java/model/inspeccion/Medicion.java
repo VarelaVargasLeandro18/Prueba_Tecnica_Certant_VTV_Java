@@ -1,9 +1,13 @@
 package model.inspeccion;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,9 +21,10 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="MEDICIONES")
-public class Medicion implements Serializable {
+public class Medicion implements Serializable, IEstadoGeneral {
     
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
     
     @ManyToOne
@@ -76,7 +81,7 @@ public class Medicion implements Serializable {
         this.Id = Id;
         return this;
     }
-
+    
     public Medicion setSistemaDeFrenos(EstadoInspeccion sistemaDeFrenos) {
         this.sistemaDeFrenos = sistemaDeFrenos;
         return this;
@@ -151,5 +156,27 @@ public class Medicion implements Serializable {
         }
         return true;
     }
-    
+
+    @Override
+    public EstadoInspeccion obtenerEstadoGeneral() {
+        List<EstadoInspeccion> estados = new ArrayList<>(4);
+        estados.add(this.direccion);
+        estados.add(this.sistemaDeFrenos);
+        estados.add(this.suspension);
+        estados.add(this.trenDelantero);
+        
+        int auxiliarVeracidad = Integer.MIN_VALUE;
+        EstadoInspeccion ret = null;
+        
+        for( EstadoInspeccion estado : estados ) {
+            
+            if ( estado != null && estado.getVeracidad() > auxiliarVeracidad ) {
+                auxiliarVeracidad = estado.getVeracidad();
+                ret = estado;
+            }                
+            
+        }        
+        
+        return ret;   
+    }
 }

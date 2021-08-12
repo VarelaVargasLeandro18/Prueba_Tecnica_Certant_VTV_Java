@@ -2,6 +2,8 @@ package model.inspeccion;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="INSPECCIONES")
-public class Inspeccion implements Serializable {
+public class Inspeccion implements Serializable, IEstadoGeneral {
     
     @Id
     @Column(name="numero")
@@ -50,18 +52,17 @@ public class Inspeccion implements Serializable {
     private Auto inspeccionado;
     
     @ManyToOne
-    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"), nullable=true)
+    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"), nullable=false)
     private Observacion observacion;
     
     @ManyToOne
-    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"), nullable=true)
+    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"), nullable=false)
     private Medicion medicion;
 
     public Inspeccion() {}
 
-    public Inspeccion(LocalDateTime fecha, EstadoInspeccion estado, TipoPropietario tipo, Inspector inspector, Auto inspeccionado, Observacion observacion, Medicion medicion) {
+    public Inspeccion(LocalDateTime fecha, TipoPropietario tipo, Inspector inspector, Auto inspeccionado, Observacion observacion, Medicion medicion) {
         this.fecha = fecha;
-        this.estado = estado;
         this.tipo = tipo;
         this.inspector = inspector;
         this.inspeccionado = inspeccionado;
@@ -136,15 +137,18 @@ public class Inspeccion implements Serializable {
 
     public Inspeccion setObservacion(Observacion observacion) {
         this.observacion = observacion;
+        this.estado = this.obtenerEstadoGeneral();
         return this;
     }
 
     public Inspeccion setMedicion(Medicion medicion) {
         this.medicion = medicion;
+        this.estado = this.obtenerEstadoGeneral();
         return this;
     }
     //</editor-fold>
     
+    @Override
     public String toString() {
         JSONObject json = new JSONObject();
         
@@ -210,6 +214,29 @@ public class Inspeccion implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public EstadoInspeccion obtenerEstadoGeneral() {
+        List<EstadoInspeccion> estados = new ArrayList<>(2);
+        
+        if ( this.observacion != null ) estados.add( this.observacion.obtenerEstadoGeneral() );
+        if ( this.medicion != null ) estados.add( this.medicion.obtenerEstadoGeneral() );
+        
+        int auxiliarVeracidad = Integer.MIN_VALUE;
+        EstadoInspeccion ret = null;
+        
+        for( EstadoInspeccion estado : estados ) {
+            
+            if ( estado != null && estado.getVeracidad() > auxiliarVeracidad ) {
+                auxiliarVeracidad = estado.getVeracidad();
+                ret = estado;
+            }                
+            
+        }        
+        
+        return ret;  
+        
     }
     
 }

@@ -1,10 +1,14 @@
 package model.inspeccion;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,9 +22,10 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="OBSERVACIONES")
-public class Observacion implements Serializable {
+public class Observacion implements Serializable, IEstadoGeneral {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
     
     @ManyToOne
@@ -51,8 +56,7 @@ public class Observacion implements Serializable {
     @JoinColumn(name="emergencia", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Emergencia"), nullable=false)
     private EstadoInspeccion emergencia;
 
-    public Observacion() {
-    }
+    public Observacion() {}
 
     public Observacion(Long Id, EstadoInspeccion luces, EstadoInspeccion patente, EstadoInspeccion espejos, EstadoInspeccion chasis, EstadoInspeccion vidrios, EstadoInspeccion seguridad, EstadoInspeccion emergencia) {
         this.Id = Id;
@@ -104,7 +108,7 @@ public class Observacion implements Serializable {
         this.Id = Id;
         return this;
     }
-
+    
     public Observacion setLuces(EstadoInspeccion luces) {
         this.luces = luces;
         return this;
@@ -208,6 +212,32 @@ public class Observacion implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public EstadoInspeccion obtenerEstadoGeneral() {
+        List<EstadoInspeccion> estados = new ArrayList<>(7);
+        estados.add(this.chasis);
+        estados.add(this.emergencia);
+        estados.add(this.espejos);
+        estados.add(this.luces);
+        estados.add(this.patente);
+        estados.add(this.seguridad);
+        estados.add(this.vidrios);
+        
+        int auxiliarVeracidad = Integer.MIN_VALUE;
+        EstadoInspeccion ret = null;
+        
+        for( EstadoInspeccion estado : estados ) {
+            
+            if ( estado != null && estado.getVeracidad() > auxiliarVeracidad ) {
+                auxiliarVeracidad = estado.getVeracidad();
+                ret = estado;
+            }                
+            
+        }
+        
+        return ret;        
     }
     
 }

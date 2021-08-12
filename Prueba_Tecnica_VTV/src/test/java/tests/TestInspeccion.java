@@ -23,6 +23,8 @@ import model.personas.Propietario;
 import model.personas.TipoPropietario;
  
 import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
@@ -141,22 +143,22 @@ public class TestInspeccion {
             this.estadoInspeccionCRUD = new EstadoInspeccionCRUD();
             
             if ( ( this.apto = this.estadoInspeccionCRUD.leerPorEstado("Apto") ) == null ) {
-                this.apto = new EstadoInspeccion("Apto");
+                this.apto = new EstadoInspeccion("Apto", 0);
                 this.estadoInspeccionCRUD.create(this.apto);
             }
             
             if ( ( this.condicional = this.estadoInspeccionCRUD.leerPorEstado("Condicional") ) == null ) {
-                this.condicional = new EstadoInspeccion("Condicional");
+                this.condicional = new EstadoInspeccion("Condicional", 1);
                 this.estadoInspeccionCRUD.create(this.condicional);
             }
             
             if ( ( this.rechazado = this.estadoInspeccionCRUD.leerPorEstado("Rechazado") ) == null ) {
-                this.rechazado = new EstadoInspeccion("Rechazado");
+                this.rechazado = new EstadoInspeccion("Rechazado", 2);
                 this.estadoInspeccionCRUD.create(this.rechazado);
             }
             
             if ( ( this.enProceso = this.estadoInspeccionCRUD.leerPorEstado("En Proceso") ) == null ) {
-                this.enProceso = new EstadoInspeccion("En Proceso");
+                this.enProceso = new EstadoInspeccion("En Proceso", 0);
                 this.estadoInspeccionCRUD.create(this.enProceso);
             }
             
@@ -175,13 +177,12 @@ public class TestInspeccion {
             this.inspeccionCRUD = new InspeccionCRUD();
             this.inspeccion = new Inspeccion(
                     LocalDateTime.now(),
-                    this.enProceso,
                     this.tipoPropietario,
                     this.inspector,
                     this.autoUno,
                     null,
                     null
-            );
+            ).setEstado(this.enProceso);
             
             this.inspeccionCRUD.create( this.inspeccion );
             
@@ -193,10 +194,42 @@ public class TestInspeccion {
     }
     
     @Test
-    @DisplayName("Creacion de Observacion y Medicion")
-    public void crearObservacionYMedicion() {
+    @DisplayName("Creacion de Observacion y Medicion y persistencia de Inspeccion.")
+    public void crearObservacionYMedicionYPersistirInspeccion() {
         
-        
+        try {
+            this.observacionCRUD = new ObservacionCRUD();
+            this.medicionCRUD = new MedicionCRUD();
+            
+            this.observacion = new Observacion()
+                    .setChasis( this.apto )
+                    .setEmergencia( this.apto )
+                    .setEspejos( this.apto )
+                    .setLuces( this.apto )
+                    .setPatente( this.apto )
+                    .setSeguridad( this.apto )
+                    .setVidrios( this.apto );
+            this.observacionCRUD.create(this.observacion);
+            
+            this.medicion = new Medicion()
+                    .setDireccion( this.condicional )
+                    .setSistemaDeFrenos( this.apto )
+                    .setSuspension( this.apto )
+                    .setTrenDelantero( this.rechazado );
+            this.observacionCRUD.create(this.observacion);
+            
+            this.inspeccion.setObservacion(this.observacion);
+            this.inspeccion.setMedicion(this.medicion);
+            this.inspeccionCRUD.create(this.inspeccion);
+            
+            assertAll(
+                    () -> {assertNotNull( this.observacion.getId() );},
+                    () -> {assertNotNull( this.medicion.getId() );},
+                    () -> {assertEquals(this.inspeccion.getEstado(), "Rechazado");}
+            );
+        } catch ( CreateEntityException ex ) {
+            fail(ex);
+        }
         
     }
     //</editor-fold>

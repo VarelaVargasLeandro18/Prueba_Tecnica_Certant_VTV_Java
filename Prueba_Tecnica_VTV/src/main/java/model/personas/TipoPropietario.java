@@ -42,6 +42,11 @@ public class TipoPropietario implements Serializable {
     //</editor-fold>
 
     //<editor-fold desc="Setters" defaultstate="collapsed">
+    public TipoPropietario setId(Long Id) {
+        this.Id = Id;
+        return this;
+    }
+    
     public TipoPropietario setTipo(String tipo) {
         this.tipo = tipo;
         return this;

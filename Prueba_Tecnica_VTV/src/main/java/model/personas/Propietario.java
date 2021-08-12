@@ -19,7 +19,7 @@ import org.json.JSONObject;
 public class Propietario extends Persona implements Serializable {
     
     @ManyToOne
-    @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Tipo"), nullable=false)
+    @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_TipoPropietario"), nullable=false)
     private TipoPropietario tipo;
 
     public Propietario() {}

@@ -25,10 +25,20 @@ public class EstadoInspeccion implements Serializable {
     @Column(name="estado", nullable=false)
     private String estado;
     
+    @Column(name="veracidad", nullable=false)
+    private int veracidad;
+    
     public EstadoInspeccion () {}
 
-    public EstadoInspeccion(String estado) {
+    public EstadoInspeccion(String estado, int veracidad) {
         this.estado = estado;
+        this.veracidad = veracidad;
+    }
+    
+    public EstadoInspeccion( EstadoInspeccion estadoInspeccion ) {
+        this.Id = estadoInspeccion.Id;
+        this.estado = estadoInspeccion.estado;
+        this.veracidad = estadoInspeccion.veracidad;
     }
 
     //<editor-fold desc="Getters" defaultstate="collapsed">
@@ -38,6 +48,10 @@ public class EstadoInspeccion implements Serializable {
 
     public String getEstado() {
         return estado;
+    }
+
+    public int getVeracidad() {
+        return veracidad;
     }
     //</editor-fold>
 
@@ -49,6 +63,11 @@ public class EstadoInspeccion implements Serializable {
 
     public EstadoInspeccion setEstado(String estado) {
         this.estado = estado;
+        return this;
+    }
+
+    public EstadoInspeccion setVeracidad(int veracidad) {
+        this.veracidad = veracidad;
         return this;
     }
     //</editor-fold>
