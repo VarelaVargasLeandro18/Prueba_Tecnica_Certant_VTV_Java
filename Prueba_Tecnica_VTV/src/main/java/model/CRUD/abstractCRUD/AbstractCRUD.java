@@ -8,8 +8,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Varela Vargas Leandro Gastón
+ * @param <T> Clase de la entidad.
+ * @param <K> Clase/primitivo de la llave de la entidad.
  */
 public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     
@@ -24,7 +25,7 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     }
 
     @Override
-    public T readOne(K id) {
+    public T readOne(K id) throws ReadEntityException {
         
         T findedEntity = null;
         
@@ -32,7 +33,7 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
             findedEntity = this.getEntityManager().find( this.entityClass , id );
         }
         catch ( Throwable ex ) {
-            System.err.println( ex.getStackTrace().toString() );
+            throw new ReadEntityException(ex);
         }
         
         return findedEntity;
@@ -40,7 +41,7 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     }
 
     @Override
-    public List<T> readAll() {
+    public List<T> readAll() throws ReadEntityException {
         
         List<T> findedEntities = null;
         EntityManager em = this.getEntityManager();
@@ -55,18 +56,23 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
             findedEntities = em.createQuery(cq).getResultList();
         }
         catch ( Throwable ex ) {
-            System.err.println( ex.getStackTrace().toString() );
+            throw new ReadEntityException(ex);
         }
         
         return findedEntities;
     }
 
     @Override
-    public void delete(T entity) {
-        this.getEntityManager().getTransaction().begin();
-        entity = this.getEntityManager().merge(entity);
-        this.getEntityManager().remove(entity);
-        this.getEntityManager().getTransaction().commit();
+    public void delete(T entity) throws DeleteEntityException  {
+        try {
+            this.getEntityManager().getTransaction().begin();
+            entity = this.getEntityManager().merge(entity);
+            this.getEntityManager().remove(entity);
+            this.getEntityManager().getTransaction().commit();
+        }
+        catch ( Throwable ex ) {
+            throw new DeleteEntityException(ex);
+        }
     }
 
     @Override
@@ -75,10 +81,14 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     }
     
     @Override
-    public void create( T created ) {
-        this.getEntityManager().getTransaction().begin();
-        this.getEntityManager().persist(created);
-        this.getEntityManager().getTransaction().commit();
+    public void create( T created ) throws CreateEntityException {
+        try {
+            this.getEntityManager().getTransaction().begin();
+            this.getEntityManager().persist(created);
+            this.getEntityManager().getTransaction().commit();
+        } catch ( Throwable ex ) {
+            throw new CreateEntityException(ex);
+        }
     }
     
 }
