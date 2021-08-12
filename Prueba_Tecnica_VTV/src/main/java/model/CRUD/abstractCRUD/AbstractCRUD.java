@@ -76,8 +76,13 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     }
 
     @Override
-    public T update(T updated) {
-        return this.getEntityManager().merge(updated);
+    public T update(T updated) throws UpdateEntityException {
+        try {
+            return this.getEntityManager().merge(updated);
+        }
+        catch ( Throwable ex ) {
+            throw new UpdateEntityException(ex);
+        }
     }
     
     @Override

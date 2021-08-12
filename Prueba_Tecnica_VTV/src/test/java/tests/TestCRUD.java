@@ -5,7 +5,7 @@ import com.mycompany.prueba_tecnica_vtv.JPAEntityManagerFactory;
 import javax.persistence.EntityManager;
 
 import model.CRUD.TipoPropietarioCRUD;
-import model.CRUD.abstractCRUD.AbstractCRUD;
+import model.CRUD.abstractCRUD.CreateEntityException;
 import model.personas.TipoPropietario;
 
 import org.junit.jupiter.api.DisplayName;
@@ -67,10 +67,15 @@ public class TestCRUD {
      * Creamos un Tipo Propietario y chequeamos que se haya subido a la BBDD.
      */
     public void creacionTipoPropietario() {
-       this.tipoCRUD.create( this.tipo );
-       this.tipoId = this.tipo.getId();
-              
-       assertNotNull( this.tipo.getId() );        
+        try {
+            this.tipoCRUD.create( this.tipo );
+            this.tipoId = this.tipo.getId();
+
+            assertNotNull( this.tipo.getId() );   
+        }
+        catch( CreateEntityException ex ) {
+            fail(ex);
+        }
     }
     
     @Test
