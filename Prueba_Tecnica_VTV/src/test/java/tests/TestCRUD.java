@@ -33,7 +33,7 @@ public class TestCRUD {
     private EntityManager em;
     private Long tipoId;
     
-    //<editor-fold desc="BeforeAll" defaultstate="collapse">
+    //<editor-fold desc="BeforeAll" defaultstate="collapsed">
     @BeforeAll
     public void initializeCRUDTipoPropietario() {
         try {
@@ -61,7 +61,8 @@ public class TestCRUD {
         }
     }
     //</editor-fold>
-        
+    
+    // <editor-fold desc="Tests">
     @Test
     @DisplayName("Excepción cuando se pasa una Clase que NO es Entity")
     /**
@@ -112,5 +113,6 @@ public class TestCRUD {
         
         assertNull(this.tipoCRUD.readOne(this.tipoId));
     }
+    //</editor-fold>
     
 }
