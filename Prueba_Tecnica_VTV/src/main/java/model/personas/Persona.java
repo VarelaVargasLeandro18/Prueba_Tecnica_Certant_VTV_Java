@@ -69,6 +69,32 @@ public abstract class Persona {
         return NroTelefono;
     }
     // </editor-fold>
+
+    //<editor-fold desc="Setters" defaultstate="collapsed">
+    public void setCUIL(Long CUIL) {
+        this.CUIL = CUIL;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setFechaNac(LocalDateTime fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNroTelefono(String NroTelefono) {
+        this.NroTelefono = NroTelefono;
+    }
+    //</editor-fold>
     
     @Override
     public String toString() {

@@ -51,6 +51,16 @@ public class Inspector extends Persona implements Serializable {
     }
     // </editor-fold>
 
+    //<editor-fold desc="Setters" defaultstate="collapsed">
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    //</editor-fold>
+    
     @Override
     public String toString() {
         JSONObject json = new JSONObject(super.toString());

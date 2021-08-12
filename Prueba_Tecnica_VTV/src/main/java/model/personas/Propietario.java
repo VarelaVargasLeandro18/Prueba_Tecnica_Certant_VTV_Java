@@ -22,8 +22,7 @@ public class Propietario extends Persona implements Serializable {
     @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Tipo"), nullable=false)
     private TipoPropietario tipo;
 
-    public Propietario() {
-    }
+    public Propietario() {}
 
     public Propietario(TipoPropietario tipo, Long CUIL, String nombre, String apellido, LocalDateTime fechaNac, String email, String NroTelefono) {
         super(CUIL, nombre, apellido, fechaNac, email, NroTelefono);
