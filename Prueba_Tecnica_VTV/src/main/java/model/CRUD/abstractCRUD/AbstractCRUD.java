@@ -1,8 +1,6 @@
-package model.CRUD;
+package model.CRUD.abstractCRUD;
 
 import com.mycompany.prueba_tecnica_vtv.JPAEntityManagerFactory;
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,27 +11,12 @@ import javax.persistence.criteria.Root;
  *
  * @author Varela Vargas Leandro Gastón
  */
-public class AbstractCRUD<T,K> implements ICRUD<T,K> {
+public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     
     private final Class<T> entityClass;
 
-    public AbstractCRUD(Class<T> entityClass) throws Exception {
-        if ( this.checkIsEntity(entityClass) )
-            this.entityClass = entityClass;
-        else
-            throw new NotEntityException();
-    }
-    
-    private boolean checkIsEntity (Class<T> entityClass) {
-        
-        List<Annotation> anns = Arrays.asList( entityClass.getAnnotations() );
-        
-        for ( Annotation an : anns ) {
-            if ( "Entity".equals(an.annotationType().getSimpleName()) )
-                return true;
-        }
-        
-        return false;
+    public AbstractCRUD(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
     
     protected EntityManager getEntityManager() {

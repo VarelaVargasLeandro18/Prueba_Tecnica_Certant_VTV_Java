@@ -1,4 +1,4 @@
-package model.CRUD;
+package model.CRUD.abstractCRUD;
 
 import java.util.List;
 

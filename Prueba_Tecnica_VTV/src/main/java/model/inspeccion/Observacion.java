@@ -18,7 +18,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="OBSERVACIONES")
-public class Observacion implements Serializable {
+public final class Observacion implements Serializable {
 
     @Id
     private Long Id;

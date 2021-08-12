@@ -1,6 +1,6 @@
 package com.mycompany.prueba_tecnica_vtv;
 
-import model.CRUD.AbstractCRUD;
+import model.CRUD.abstractCRUD.AbstractCRUD;
 import model.personas.Inspector;
 
 /**

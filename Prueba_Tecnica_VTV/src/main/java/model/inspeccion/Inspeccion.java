@@ -21,7 +21,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="INSPECCIONES")
-public class Inspeccion implements Serializable {
+public final class Inspeccion implements Serializable {
     
     @Id
     @Column(name="numero")
