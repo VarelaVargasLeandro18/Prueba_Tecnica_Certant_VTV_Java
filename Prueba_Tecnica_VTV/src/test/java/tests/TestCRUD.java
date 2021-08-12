@@ -4,8 +4,8 @@ import com.mycompany.prueba_tecnica_vtv.JPAEntityManagerFactory;
 
 import javax.persistence.EntityManager;
 
-import model.CRUD.AbstractCRUD;
-import model.CRUD.NotEntityException;
+import model.CRUD.TipoPropietarioCRUD;
+import model.CRUD.abstractCRUD.AbstractCRUD;
 import model.personas.TipoPropietario;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,11 +14,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  *
@@ -27,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @TestInstance(Lifecycle.PER_CLASS)
 public class TestCRUD {
     
-    private AbstractCRUD<TipoPropietario, Long> tipoCRUD;
+    private TipoPropietarioCRUD tipoCRUD;
     private TipoPropietario tipo;
     private final String strTipo = "AAAA";
     private EntityManager em;
@@ -37,7 +35,7 @@ public class TestCRUD {
     @BeforeAll
     public void initializeCRUDTipoPropietario() {
         try {
-            this.tipoCRUD = new AbstractCRUD( TipoPropietario.class );
+            this.tipoCRUD = new TipoPropietarioCRUD();
         } catch ( Throwable ex ) {
             fail( ex );
         }
@@ -63,20 +61,6 @@ public class TestCRUD {
     //</editor-fold>
     
     // <editor-fold desc="Tests">
-    @Test
-    @DisplayName("Excepción cuando se pasa una Clase que NO es Entity")
-    /**
-     * Creamos una instancia de AbstractCRUD de forma errónea pasándole una clase que no es una entidad
-     * y esperamos que nos dé una NotEntityException.
-     */
-    public void noEntityExcepcion() {
-        Exception exception = assertThrows( NotEntityException.class , () -> {
-           new AbstractCRUD( NotEntityException.class ); 
-        });
-        
-        assertTrue( exception instanceof NotEntityException );
-    }
-    
     @Test
     @DisplayName("Creación de TipoPropietario en BBDD")
     /**
