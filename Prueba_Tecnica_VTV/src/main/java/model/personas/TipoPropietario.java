@@ -16,7 +16,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="TIPOS_PROPIETARIO")
-public final class TipoPropietario implements Serializable {
+public class TipoPropietario implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

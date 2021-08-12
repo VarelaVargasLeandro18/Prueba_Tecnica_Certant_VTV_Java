@@ -15,31 +15,31 @@ public interface ICRUD<T, K> {
      * @param id
      * @return entidad buscada o null si no la encuentra.
      */
-    public T readOne ( K id );
+    public T readOne ( K id ) throws ReadEntityException;
     
     /**
      * Lee todas las entidades.
      * @return lista de entidades.
      */
-    public List<T> readAll ();
+    public List<T> readAll () throws ReadEntityException;
     
     /**
      * Borra un entidad.
      * @param entity
      */
-    public void delete ( T entity );
+    public void delete ( T entity ) throws DeleteEntityException;
     
     /**
      * Actualiza una entidad.
      * @param updated
      * @return entidad actualizada.
      */
-    public T update ( T updated );
+    public T update ( T updated ) throws UpdateEntityException;
     
     /**
      * Crea una entidad.
      * @param created 
      */
-    public void create ( T created );
+    public void create ( T created ) throws CreateEntityException;
     
 }
