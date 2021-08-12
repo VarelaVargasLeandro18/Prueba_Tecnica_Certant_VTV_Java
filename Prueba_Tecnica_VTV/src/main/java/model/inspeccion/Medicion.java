@@ -23,19 +23,19 @@ public class Medicion implements Serializable {
     private Long Id;
     
     @ManyToOne
-    @JoinColumn(name="sist_de_frenos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_SistDeFrenos"))
+    @JoinColumn(name="sist_de_frenos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_SistDeFrenos"), nullable=false)
     private EstadoInspeccion sistemaDeFrenos;
     
     @ManyToOne
-    @JoinColumn(name="suspension", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Suspension"))
+    @JoinColumn(name="suspension", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Suspension"), nullable=false)
     private EstadoInspeccion suspension;
     
     @ManyToOne
-    @JoinColumn(name="direccion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Direccion"))
+    @JoinColumn(name="direccion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Direccion"), nullable=false)
     private EstadoInspeccion direccion;
     
     @ManyToOne
-    @JoinColumn(name="tren_delantero", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_TrenDelantero"))
+    @JoinColumn(name="tren_delantero", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_TrenDelantero"), nullable=false)
     private EstadoInspeccion trenDelantero;
 
     public Medicion() {

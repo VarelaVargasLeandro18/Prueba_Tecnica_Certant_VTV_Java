@@ -24,31 +24,31 @@ public class Observacion implements Serializable {
     private Long Id;
     
     @ManyToOne
-    @JoinColumn(name="luces", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Luces"))
+    @JoinColumn(name="luces", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Luces"), nullable=false)
     private EstadoInspeccion luces;
     
     @ManyToOne
-    @JoinColumn(name="patente", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Patente"))
+    @JoinColumn(name="patente", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Patente"), nullable=false)
     private EstadoInspeccion patente;
     
     @ManyToOne
-    @JoinColumn(name="espejos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Espejos"))
+    @JoinColumn(name="espejos", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Espejos"), nullable=false)
     private EstadoInspeccion espejos;
     
     @ManyToOne
-    @JoinColumn(name="chasis", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Chasis"))
+    @JoinColumn(name="chasis", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Chasis"), nullable=false)
     private EstadoInspeccion chasis;
     
     @ManyToOne
-    @JoinColumn(name="vidrios", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Vidrios"))
+    @JoinColumn(name="vidrios", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Vidrios"), nullable=false)
     private EstadoInspeccion vidrios;
     
     @ManyToOne
-    @JoinColumn(name="seguridad", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Seguridad"))
+    @JoinColumn(name="seguridad", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Seguridad"), nullable=false)
     private EstadoInspeccion seguridad;
     
     @ManyToOne
-    @JoinColumn(name="emergencia", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Emergencia"))
+    @JoinColumn(name="emergencia", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Emergencia"), nullable=false)
     private EstadoInspeccion emergencia;
 
     public Observacion() {

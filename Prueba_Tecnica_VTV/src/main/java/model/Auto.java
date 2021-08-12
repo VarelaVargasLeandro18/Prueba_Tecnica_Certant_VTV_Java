@@ -32,7 +32,7 @@ public class Auto implements Serializable {
     private String modelo;
     
     @ManyToOne(optional=false, targetEntity=Propietario.class)
-    @JoinColumn(name="propietario_CUIL", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Propietario"))
+    @JoinColumn(name="propietario_CUIL", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Propietario"), nullable=false)
     private Propietario propietario;
     
     public Auto() {}
@@ -59,6 +59,24 @@ public class Auto implements Serializable {
 
     public Propietario getPropietario() {
         return propietario;
+    }
+    //</editor-fold>
+    
+    //<editor-fold desc="Setters" defaultstate="collapsed">
+    public void setDominio(String dominio) {
+        this.dominio = dominio;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    
+    public void setPropietario(Propietario propietario) {    
+        this.propietario = propietario;
     }
     //</editor-fold>
     

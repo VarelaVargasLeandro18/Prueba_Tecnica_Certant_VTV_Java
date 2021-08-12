@@ -34,27 +34,27 @@ public class Inspeccion implements Serializable {
     private LocalDateTime fecha;
     
     @ManyToOne
-    @JoinColumn(name="estado", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Estado"))
+    @JoinColumn(name="estado", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Estado"), nullable=false)
     private EstadoInspeccion estado;
     
     @ManyToOne
-    @JoinColumn(name="exento", referencedColumnName="tipo", foreignKey=@ForeignKey(name="FK_Tipo"))
+    @JoinColumn(name="exento", referencedColumnName="tipo", foreignKey=@ForeignKey(name="FK_Tipo"), nullable=false)
     private TipoPropietario tipo;
     
     @ManyToOne
-    @JoinColumn(name="inspector", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Inspector"))
+    @JoinColumn(name="inspector", referencedColumnName="CUIL", foreignKey=@ForeignKey(name="FK_Inspector"), nullable=false)
     private Inspector inspector;
     
     @ManyToOne
-    @JoinColumn(name="auto_inspeccionado", referencedColumnName="dominio", foreignKey=@ForeignKey(name="FK_Auto"))
+    @JoinColumn(name="auto_inspeccionado", referencedColumnName="dominio", foreignKey=@ForeignKey(name="FK_Auto"), nullable=false)
     private Auto inspeccionado;
     
     @ManyToOne
-    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"))
+    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"), nullable=true)
     private Observacion observacion;
     
     @ManyToOne
-    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"))
+    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"), nullable=true)
     private Medicion medicion;
 
     public Inspeccion() {}
