@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 public class TipoPropietario implements Serializable {
     
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
     
     @Column(name="tipo", nullable=false)
@@ -24,8 +27,7 @@ public class TipoPropietario implements Serializable {
 
     public TipoPropietario() {}
     
-    public TipoPropietario(Long Id, String tipo) {
-        this.Id = Id;
+    public TipoPropietario(String tipo) {
         this.tipo = tipo;
     }
     
@@ -40,11 +42,6 @@ public class TipoPropietario implements Serializable {
     //</editor-fold>
 
     //<editor-fold desc="Setters" defaultstate="collapsed">
-    public TipoPropietario setId(Long Id) {
-        this.Id = Id;
-        return this;
-    }
-
     public TipoPropietario setTipo(String tipo) {
         this.tipo = tipo;
         return this;

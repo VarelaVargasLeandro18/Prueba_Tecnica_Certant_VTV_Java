@@ -30,6 +30,16 @@ public class Inspector extends Persona implements Serializable {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
+    
+    public Inspector( Inspector inspector ) {
+        super( inspector.getCUIL(), 
+               inspector.getNombre(),
+               inspector.getApellido(),
+               inspector.getFechaNac(),
+               inspector.getEmail(),
+               inspector.getNroTelefono()
+        ); // Todos Immutable.
+    }
 
     // <editor-fold desc="Getters" defaultstate="collapsed">
     public String getUsuario() {
@@ -72,5 +82,7 @@ public class Inspector extends Persona implements Serializable {
         }
         return true;
     }
+    
+    
      
 }

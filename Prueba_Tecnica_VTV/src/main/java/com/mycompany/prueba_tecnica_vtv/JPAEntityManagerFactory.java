@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
  */
 public class JPAEntityManagerFactory {
     
-    private static EntityManagerFactory emf = buildFactory();
+    private static final EntityManagerFactory emf = buildFactory();
     private static EntityManager em = null;
     
     private static final String PERSISTENCE_UNIT_NAME = "Prueba_Tecnica_VTV";
