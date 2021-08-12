@@ -6,6 +6,8 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,7 +27,8 @@ public class Inspeccion implements Serializable {
     
     @Id
     @Column(name="numero")
-    private Long numero;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long numero = null;
     
     @Column(name="fecha", nullable=false)
     private LocalDateTime fecha;
@@ -57,8 +60,7 @@ public class Inspeccion implements Serializable {
     public Inspeccion() {
     }
 
-    public Inspeccion(Long numero, LocalDateTime fecha, EstadoInspeccion estado, TipoPropietario tipo, Inspector inspector, Auto inspeccionado, Observacion observacion, Medicion medicion) {
-        this.numero = numero;
+    public Inspeccion(LocalDateTime fecha, EstadoInspeccion estado, TipoPropietario tipo, Inspector inspector, Auto inspeccionado, Observacion observacion, Medicion medicion) {
         this.fecha = fecha;
         this.estado = estado;
         this.tipo = tipo;

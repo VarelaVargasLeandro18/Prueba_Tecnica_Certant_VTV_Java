@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 public class EstadoInspeccion implements Serializable {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
     
     @Column(name="estado", nullable=false)
@@ -24,8 +27,7 @@ public class EstadoInspeccion implements Serializable {
     
     public EstadoInspeccion () {}
 
-    public EstadoInspeccion(Long Id, String estado) {
-        this.Id = Id;
+    public EstadoInspeccion(String estado) {
         this.estado = estado;
     }
 

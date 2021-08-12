@@ -6,7 +6,11 @@ import javax.persistence.EntityManager;
 
 import model.CRUD.TipoPropietarioCRUD;
 import model.CRUD.abstractCRUD.CreateEntityException;
+import model.CRUD.abstractCRUD.DeleteEntityException;
+import model.CRUD.abstractCRUD.ReadEntityException;
+import model.CRUD.abstractCRUD.UpdateEntityException;
 import model.personas.TipoPropietario;
+import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -62,6 +68,46 @@ public class TestCRUD {
     
     // <editor-fold desc="Tests">
     @Test
+    @DisplayName("Forzado de ReadEntityException")
+    public void readEntityException() {
+        Throwable readEx = assertThrows( ReadEntityException.class, () -> {
+            this.tipoCRUD.readOne(null);
+        });
+        
+        assertTrue(readEx instanceof ReadEntityException);
+    }
+    
+    @Test
+    @DisplayName("Forzado de DeleteEntityException")
+    public void deleteEntityException() {
+        Throwable deleteEx = assertThrows( DeleteEntityException.class, () -> {
+            this.tipoCRUD.delete(null);
+        });
+        
+        assertTrue(deleteEx instanceof DeleteEntityException);
+    }
+    
+    @Test
+    @DisplayName("Forzado de UpdateEntityException")
+    public void updateEntityException() {
+        Throwable updateEx = assertThrows( UpdateEntityException.class, () -> {
+            this.tipoCRUD.update(null);
+        });
+        
+        assertTrue(updateEx instanceof UpdateEntityException);
+    }
+    
+    @Test
+    @DisplayName("Forzado de CreateEntityException")
+    public void createEntityException() {
+        Throwable createEx = assertThrows( CreateEntityException.class, () -> {
+            this.tipoCRUD.create(null);
+        });
+        
+        assertTrue(createEx instanceof CreateEntityException);
+    }
+    
+    @Test
     @DisplayName("Creación de TipoPropietario en BBDD")
     /**
      * Creamos un Tipo Propietario y chequeamos que se haya subido a la BBDD.
@@ -84,12 +130,16 @@ public class TestCRUD {
      * Actualizamos un TipoPropietario en la BBDD.
      */
     public void actualizacionTipoPropietario() {
-        String otroTipo = "Otro Tipo";
+        try {
+            String otroTipo = "Otro Tipo";
         
-        this.tipo.setTipo(otroTipo);
-        this.tipoCRUD.update(this.tipo);
-        
-        assertEquals( this.tipo.getTipo(), otroTipo );
+            this.tipo.setTipo(otroTipo);
+            this.tipoCRUD.update(this.tipo);
+
+            assertEquals( this.tipo.getTipo(), otroTipo );
+        } catch ( UpdateEntityException ex ) {
+            fail(ex);
+        }
     }
     
     @Test
@@ -98,9 +148,13 @@ public class TestCRUD {
      * Borramos un TipoPropietario en la BBDD.
      */
     public void borradoTipoPropietario() {
-        this.tipoCRUD.delete(this.tipo);
+        try {
+            this.tipoCRUD.delete(this.tipo);
         
-        assertNull(this.tipoCRUD.readOne(this.tipoId));
+            assertNull(this.tipoCRUD.readOne(this.tipoId));
+        } catch ( DeleteEntityException | ReadEntityException ex ) {
+            fail(ex);
+        }
     }
     //</editor-fold>
     

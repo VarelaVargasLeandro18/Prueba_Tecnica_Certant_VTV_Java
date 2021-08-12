@@ -13,4 +13,16 @@ public final class EstadoInspeccionCRUD extends AbstractCRUD<EstadoInspeccion, L
         super(EstadoInspeccion.class);
     }
     
+    public EstadoInspeccion leerPorEstado(String estado) {
+        try {
+            String query = "SELECT * FROM EstadoInspeccion ei WHERE ei.estado = :estado";
+
+            return this.getEntityManager().createQuery(query, EstadoInspeccion.class)
+                    .setParameter(":estado", estado)
+                    .getSingleResult();
+        } catch ( Throwable ex ) {
+            return null;
+        }
+    }
+    
 }
