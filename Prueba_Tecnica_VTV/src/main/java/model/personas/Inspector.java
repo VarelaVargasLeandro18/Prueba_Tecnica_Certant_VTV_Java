@@ -52,12 +52,14 @@ public class Inspector extends Persona implements Serializable {
     // </editor-fold>
 
     //<editor-fold desc="Setters" defaultstate="collapsed">
-    public void setUsuario(String usuario) {
+    public Inspector setUsuario(String usuario) {
         this.usuario = usuario;
+        return this;
     }
 
-    public void setContrasenia(String contrasenia) {
+    public Inspector setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+        return this;
     }
     //</editor-fold>
     

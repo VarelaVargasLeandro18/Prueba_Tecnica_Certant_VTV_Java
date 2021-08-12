@@ -71,28 +71,34 @@ public abstract class Persona {
     // </editor-fold>
 
     //<editor-fold desc="Setters" defaultstate="collapsed">
-    public void setCUIL(Long CUIL) {
+    public Persona setCUIL(Long CUIL) {
         this.CUIL = CUIL;
+        return this;
     }
 
-    public void setNombre(String nombre) {
+    public Persona setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
-    public void setApellido(String apellido) {
+    public Persona setApellido(String apellido) {
         this.apellido = apellido;
+        return this;
     }
 
-    public void setFechaNac(LocalDateTime fechaNac) {
+    public Persona setFechaNac(LocalDateTime fechaNac) {
         this.fechaNac = fechaNac;
+        return this;
     }
 
-    public void setEmail(String email) {
+    public Persona setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setNroTelefono(String NroTelefono) {
+    public Persona setNroTelefono(String NroTelefono) {
         this.NroTelefono = NroTelefono;
+        return this;
     }
     //</editor-fold>
     

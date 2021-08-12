@@ -63,20 +63,24 @@ public class Auto implements Serializable {
     //</editor-fold>
     
     //<editor-fold desc="Setters" defaultstate="collapsed">
-    public void setDominio(String dominio) {
+    public Auto setDominio(String dominio) {
         this.dominio = dominio;
+        return this;
     }
 
-    public void setMarca(String marca) {
+    public Auto setMarca(String marca) {
         this.marca = marca;
+        return this;
     }
 
-    public void setModelo(String modelo) {
+    public Auto setModelo(String modelo) {
         this.modelo = modelo;
+        return this;
     }
     
-    public void setPropietario(Propietario propietario) {    
+    public Auto setPropietario(Propietario propietario) {    
         this.propietario = propietario;
+        return this;
     }
     //</editor-fold>
     
