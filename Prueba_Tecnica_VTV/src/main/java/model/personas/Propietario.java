@@ -6,7 +6,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.json.JSONObject;
 
@@ -18,7 +18,7 @@ import org.json.JSONObject;
 @Table(name="PROPIETARIOS")
 public class Propietario extends Persona implements Serializable {
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Tipo"), nullable=false)
     private TipoPropietario tipo;
 
