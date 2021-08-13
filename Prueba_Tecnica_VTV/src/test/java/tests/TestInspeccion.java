@@ -73,7 +73,7 @@ public class TestInspeccion {
         try {            
             this.inspectorCRUD = new InspectorCRUD();
             
-            if ( this.inspectorCRUD.readOne(11111111111l) != null ) return;
+            if ( (this.inspector = this.inspectorCRUD.readOne(11111111111l)) != null ) return;
             
             this.inspector = new Inspector( 
                     "pedlop", 
@@ -95,27 +95,30 @@ public class TestInspeccion {
     public void creacionDeAutomoviles() {
        try {
             this.tipoPropietarioCRUD = new TipoPropietarioCRUD();
+            this.propietarioCRUD = new PropietarioCRUD();
            
             if ( ( this.tipoPropietario = this.tipoPropietarioCRUD.buscarPorTipo("Exento") ) == null ) {            
                 this.tipoPropietario = new TipoPropietario( "Exento" );
                 this.tipoPropietarioCRUD.create(this.tipoPropietario);
             }
            
-            this.propietarioCRUD = new PropietarioCRUD();
-            this.propietario = new Propietario(
-                    this.tipoPropietario,
-                    22222222222l,
-                    "Juan",
-                    "Perez",
-                    LocalDateTime.of(1976, Month.DECEMBER, 11, 0, 0),
-                    "juanp@mail.com",
-                    "+54 1111111111"
-            );
-            this.propietarioCRUD.create(this.propietario);
+            if ( (this.propietario = this.propietarioCRUD.readOne( 22222222222l )) == null ) {
+                this.propietarioCRUD = new PropietarioCRUD();
+                this.propietario = new Propietario(
+                        this.tipoPropietario,
+                        22222222222l,
+                        "Juan",
+                        "Perez",
+                        LocalDateTime.of(1976, Month.DECEMBER, 11, 0, 0),
+                        "juanp@mail.com",
+                        "+54 1111111111"
+                );
+                this.propietarioCRUD.create(this.propietario);
+            }
            
             this.autoCRUD = new AutoCRUD();
            
-            if ( this.autoCRUD.readOne("Imposible1") == null ) {
+            if ( (this.autoUno = this.autoCRUD.readOne("Imposible1")) == null ) {
                 this.autoUno = new Auto(
                         "Imposible1",
                         "marca",
@@ -125,7 +128,7 @@ public class TestInspeccion {
                 this.autoCRUD.create(this.autoUno);
             }
            
-            if ( this.autoCRUD.readOne("Imposible2") != null ) return;
+            if ( (this.autoDos = this.autoCRUD.readOne("Imposible2")) != null ) return;
            
             this.autoDos = new Auto(
                 "Imposible2",
@@ -165,7 +168,7 @@ public class TestInspeccion {
                 this.estadoInspeccionCRUD.create(this.enProceso);
             }
             
-        } catch ( CreateEntityException ex ) {
+        } catch ( CreateEntityException | ReadEntityException ex ) {
             fail(ex);
         }      
     }

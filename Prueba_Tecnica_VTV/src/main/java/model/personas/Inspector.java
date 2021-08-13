@@ -15,7 +15,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="INSPECTORES")
-public class Inspector extends Persona implements Serializable {
+public class Inspector extends Persona<Inspector> implements Serializable {
     
     @Column(name="usuario", nullable=false)
     private String usuario;

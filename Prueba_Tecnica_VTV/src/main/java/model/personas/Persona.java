@@ -13,7 +13,7 @@ import org.json.JSONObject;
  * @author Varela Vargas Leandro Gastón
  */
 @MappedSuperclass
-public abstract class Persona {
+public abstract class Persona<T extends Persona> {
     
     @Id
     private Long CUIL;
@@ -71,34 +71,34 @@ public abstract class Persona {
     // </editor-fold>
 
     //<editor-fold desc="Setters" defaultstate="collapsed">
-    public Persona setCUIL(Long CUIL) {
+    public T setCUIL(Long CUIL) {
         this.CUIL = CUIL;
-        return this;
+        return (T) this;
     }
 
-    public Persona setNombre(String nombre) {
+    public T setNombre(String nombre) {
         this.nombre = nombre;
-        return this;
+        return (T) this;
     }
 
-    public Persona setApellido(String apellido) {
+    public T setApellido(String apellido) {
         this.apellido = apellido;
-        return this;
+        return (T) this;
     }
 
-    public Persona setFechaNac(LocalDateTime fechaNac) {
+    public T setFechaNac(LocalDateTime fechaNac) {
         this.fechaNac = fechaNac;
-        return this;
+        return (T) this;
     }
 
-    public Persona setEmail(String email) {
+    public T setEmail(String email) {
         this.email = email;
-        return this;
+        return (T) this;
     }
 
-    public Persona setNroTelefono(String NroTelefono) {
+    public T setNroTelefono(String NroTelefono) {
         this.NroTelefono = NroTelefono;
-        return this;
+        return (T) this;
     }
     //</editor-fold>
     

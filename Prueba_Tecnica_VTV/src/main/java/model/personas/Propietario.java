@@ -16,7 +16,7 @@ import org.json.JSONObject;
  */
 @Entity
 @Table(name="PROPIETARIOS")
-public class Propietario extends Persona implements Serializable {
+public class Propietario extends Persona<Propietario> implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="tipo", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_TipoPropietario"), nullable=false)

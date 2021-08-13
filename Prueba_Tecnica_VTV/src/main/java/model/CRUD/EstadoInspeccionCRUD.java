@@ -1,6 +1,7 @@
 package model.CRUD;
 
 import model.CRUD.abstractCRUD.AbstractCRUD;
+import model.CRUD.abstractCRUD.ReadEntityException;
 import model.inspeccion.EstadoInspeccion;
 
 /**
@@ -13,15 +14,15 @@ public final class EstadoInspeccionCRUD extends AbstractCRUD<EstadoInspeccion, L
         super(EstadoInspeccion.class);
     }
     
-    public EstadoInspeccion leerPorEstado(String estado) {
+    public EstadoInspeccion leerPorEstado(String estado) throws ReadEntityException {
         try {
-            String query = "SELECT * FROM EstadoInspeccion ei WHERE ei.estado = :estado";
+            String query = "SELECT ei FROM EstadoInspeccion ei WHERE ei.estado = :estado";
 
             return this.getEntityManager().createQuery(query, EstadoInspeccion.class)
                     .setParameter("estado", estado)
                     .getSingleResult();
         } catch ( Throwable ex ) {
-            return null;
+            throw new ReadEntityException(ex);
         }
     }
     
