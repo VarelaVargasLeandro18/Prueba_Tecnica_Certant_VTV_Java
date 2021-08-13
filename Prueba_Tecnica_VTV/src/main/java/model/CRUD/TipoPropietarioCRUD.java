@@ -13,4 +13,10 @@ public final class TipoPropietarioCRUD extends AbstractCRUD<TipoPropietario, Lon
         super(TipoPropietario.class);
     }
     
+    public TipoPropietario buscarPorTipo (String tipo) {
+        return this.getEntityManager().createQuery( "SELECT tp FROM TipoPropietario tp WHERE tp.tipo = :tipo", TipoPropietario.class )
+                .setParameter( "tipo" , tipo)
+                .getSingleResult();
+    }
+    
 }

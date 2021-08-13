@@ -10,7 +10,6 @@ import model.CRUD.abstractCRUD.DeleteEntityException;
 import model.CRUD.abstractCRUD.ReadEntityException;
 import model.CRUD.abstractCRUD.UpdateEntityException;
 import model.personas.TipoPropietario;
-import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,12 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  *
  * @author Varela Vargas Leandro Gastón
  */
 @TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCRUD {
     
     private TipoPropietarioCRUD tipoCRUD;

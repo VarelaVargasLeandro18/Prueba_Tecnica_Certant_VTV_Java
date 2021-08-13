@@ -13,6 +13,7 @@ import model.CRUD.ObservacionCRUD;
 import model.CRUD.PropietarioCRUD;
 import model.CRUD.TipoPropietarioCRUD;
 import model.CRUD.abstractCRUD.CreateEntityException;
+import model.CRUD.abstractCRUD.DeleteEntityException;
 import model.CRUD.abstractCRUD.ReadEntityException;
 import model.inspeccion.EstadoInspeccion;
 import model.inspeccion.Inspeccion;
@@ -29,12 +30,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * Test de funcionamiento de CRUD de Inspecciones. 
  * @author Varela Vargas Leandro Gastón
  */
+@TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestInspeccion {
     
     private InspectorCRUD inspectorCRUD;
@@ -84,14 +92,15 @@ public class TestInspeccion {
     }
     
     @BeforeAll
-    public void creacionDePropietario() {
-        try {
+    public void creacionDeAutomoviles() {
+       try {
             this.tipoPropietarioCRUD = new TipoPropietarioCRUD();
-            this.tipoPropietario = new TipoPropietario(
-                "Exento"
-            );
-            this.tipoPropietarioCRUD.create(this.tipoPropietario);
-            
+           
+            if ( ( this.tipoPropietario = this.tipoPropietarioCRUD.buscarPorTipo("Exento") ) == null ) {            
+                this.tipoPropietario = new TipoPropietario( "Exento" );
+                this.tipoPropietarioCRUD.create(this.tipoPropietario);
+            }
+           
             this.propietarioCRUD = new PropietarioCRUD();
             this.propietario = new Propietario(
                     this.tipoPropietario,
@@ -103,17 +112,10 @@ public class TestInspeccion {
                     "+54 1111111111"
             );
             this.propietarioCRUD.create(this.propietario);
-        } catch ( CreateEntityException ex ) {
-            fail(ex);
-        }
-    }
-    
-    @BeforeAll
-    public void creacionDeAutomoviles() {
-       try {
-           this.autoCRUD = new AutoCRUD();
            
-           if ( this.autoCRUD.readOne("Imposible1") == null ) {
+            this.autoCRUD = new AutoCRUD();
+           
+            if ( this.autoCRUD.readOne("Imposible1") == null ) {
                 this.autoUno = new Auto(
                         "Imposible1",
                         "marca",
@@ -123,18 +125,19 @@ public class TestInspeccion {
                 this.autoCRUD.create(this.autoUno);
             }
            
-           if ( this.autoCRUD.readOne("Imposible2") != null ) return;
+            if ( this.autoCRUD.readOne("Imposible2") != null ) return;
            
-           this.autoDos = new Auto(
-                   "Imposible2",
-                   "marca",
-                   "modelo",
-                   this.propietario
-           );
-           this.autoCRUD.create(this.autoDos);
-       } catch (CreateEntityException | ReadEntityException ex) {
-           fail(ex);
-       }
+            this.autoDos = new Auto(
+                "Imposible2",
+                "marca",
+                "modelo",
+                this.propietario
+            );
+            this.autoCRUD.create(this.autoDos);
+           
+        } catch (CreateEntityException | ReadEntityException ex) {
+            fail(ex);
+        }
     }
     
     @BeforeAll
@@ -171,6 +174,7 @@ public class TestInspeccion {
     // <editor-fold desc="Tests">
     @Test
     @DisplayName("Comienzo de una inspección.")
+    @Order(1)
     public void empezarInspeccion() {
         
         try {
@@ -195,6 +199,7 @@ public class TestInspeccion {
     
     @Test
     @DisplayName("Creacion de Observacion y Medicion y persistencia de Inspeccion.")
+    @Order(2)
     public void crearObservacionYMedicionYPersistirInspeccion() {
         
         try {
@@ -216,7 +221,7 @@ public class TestInspeccion {
                     .setSistemaDeFrenos( this.apto )
                     .setSuspension( this.apto )
                     .setTrenDelantero( this.rechazado );
-            this.observacionCRUD.create(this.observacion);
+            this.medicionCRUD.create(this.medicion);
             
             this.inspeccion.setObservacion(this.observacion);
             this.inspeccion.setMedicion(this.medicion);
@@ -236,23 +241,18 @@ public class TestInspeccion {
     
     //<editor-fold desc="AfterAll - Eliminado de Entidades Utilizadas" defaultstate="collapsed">
     @AfterAll
-    public void eliminarInspector() {
-        
-    }
-    
-    @AfterAll
-    public void eliminarPropietario() {
-        
-    }
-    
-    @AfterAll
-    public void eliminarAutomovilUno() {
-        
-    }
-    
-    @AfterAll
-    public void eliminarAutomovilDos() {
-        
+    public void borrarEntidades() {
+        try {
+            this.inspeccionCRUD.delete(this.inspeccion);
+            this.medicionCRUD.delete(this.medicion);
+            this.observacionCRUD.delete(this.observacion);
+            this.autoCRUD.delete(this.autoUno);
+            this.autoCRUD.delete(this.autoDos);
+            this.propietarioCRUD.delete(this.propietario);
+            this.inspectorCRUD.delete(this.inspector);
+        } catch ( DeleteEntityException ex ) {
+            fail(ex);
+        }
     }
     //</editor-fold>
     

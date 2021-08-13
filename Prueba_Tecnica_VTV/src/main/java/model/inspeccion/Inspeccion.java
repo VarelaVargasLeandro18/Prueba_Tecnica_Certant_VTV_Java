@@ -52,11 +52,11 @@ public class Inspeccion implements Serializable, IEstadoGeneral {
     private Auto inspeccionado;
     
     @ManyToOne
-    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"), nullable=false)
+    @JoinColumn(name="observacion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Observacion"), nullable=true)
     private Observacion observacion;
     
     @ManyToOne
-    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"), nullable=false)
+    @JoinColumn(name="medicion", referencedColumnName="Id", foreignKey=@ForeignKey(name="FK_Medicion"), nullable=true)
     private Medicion medicion;
 
     public Inspeccion() {}

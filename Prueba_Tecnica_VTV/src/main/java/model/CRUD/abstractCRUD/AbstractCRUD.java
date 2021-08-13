@@ -71,6 +71,7 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
             this.getEntityManager().getTransaction().commit();
         }
         catch ( Throwable ex ) {
+            this.rollbackTransactions();
             throw new DeleteEntityException(ex);
         }
     }
@@ -92,8 +93,17 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
             this.getEntityManager().persist(created);
             this.getEntityManager().getTransaction().commit();
         } catch ( Throwable ex ) {
+            this.rollbackTransactions();
             throw new CreateEntityException(ex);
         }
+    }
+    
+    public void rollbackTransactions() {
+        this.getEntityManager().getTransaction().rollback();
+    }
+    
+    public void commitTransactions() {
+        this.getEntityManager().getTransaction().commit();
     }
     
 }
