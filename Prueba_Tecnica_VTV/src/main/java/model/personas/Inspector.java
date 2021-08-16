@@ -20,6 +20,7 @@ public class Inspector extends Persona<Inspector> implements Serializable {
     @Column(name="usuario", nullable=false)
     private String usuario;
     
+    /* NO ES UNA FORMA SEGURA DE MANEJAR UNA CONTRASEÑA PERO LO UTILIZO A FINES PRÁCTICOS. */
     @Column(name="contrasenia", nullable=false)
     private String contrasenia;
 

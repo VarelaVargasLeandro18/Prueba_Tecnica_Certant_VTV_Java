@@ -17,7 +17,6 @@ public final class AutoCRUD extends AbstractCRUD<Auto, String> {
         super(Auto.class);
     }
     
-    
     /**
      * Cuarto Informe - Chequeo de fechas de vencimiento dentro del año de haberse
      * ejecutado una Inspeccion o que no esté aprobada.
