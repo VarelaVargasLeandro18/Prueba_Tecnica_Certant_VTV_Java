@@ -6,11 +6,12 @@ import model.CRUD.abstractCRUD.ReadEntityException;
 /**
  *
  * @author Varela Vargas Leandro Gastón
+ * @param <T>
  */
 public class LecturaGUI<T, K> implements IGUIAdapter {
     
-    private AbstractCRUD<T, K> crud;
-    private GUI gui;
+    private final AbstractCRUD<T, K> crud;
+    private final GUI gui;
     
     public LecturaGUI ( AbstractCRUD<T, K> crud, GUI gui ) {
         this.crud = crud;

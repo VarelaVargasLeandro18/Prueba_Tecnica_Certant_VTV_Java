@@ -7,11 +7,12 @@ import model.CRUD.abstractCRUD.ReadEntityException;
 /**
  *
  * @author Varela Vargas Leandro Gastón
+ * @param <T>
  */
 public class BorradoStringGUI<T> implements IGUIAdapter {
     
-    private AbstractCRUD<T,String> crud;
-    private GUI gui;
+    private final AbstractCRUD<T,String> crud;
+    private final GUI gui;
     
     public BorradoStringGUI ( AbstractCRUD<T, String> crud, GUI gui ) {
          this.crud = crud;
