@@ -43,7 +43,7 @@ public abstract class AbstractCRUD<T,K> implements ICRUD<T,K> {
     @Override
     public List<T> readAll() throws ReadEntityException {
         
-        List<T> findedEntities = null;
+        List<T> findedEntities;
         EntityManager em = this.getEntityManager();
         
         try {

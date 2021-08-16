@@ -1,13 +1,15 @@
 package com.mycompany.prueba_tecnica_vtv;
 
 import com.mycompany.prueba_tecnica_vtv.gui.AltaAutoGUI;
+import com.mycompany.prueba_tecnica_vtv.gui.AltaInspeccionGUI;
+import com.mycompany.prueba_tecnica_vtv.gui.AltaInspectorGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.BorradoLongGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.BorradoStringGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.GUI;
 import com.mycompany.prueba_tecnica_vtv.gui.IGUIAdapter;
 import com.mycompany.prueba_tecnica_vtv.gui.LecturaGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.ModificacionAutoGUI;
-import java.util.ArrayList;
+import com.mycompany.prueba_tecnica_vtv.gui.ModificacionInspectorGUI;
 import java.util.HashMap;
 import java.util.Map;
 import model.CRUD.AutoCRUD;
@@ -67,6 +69,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) { 
+        System.out.println( "Pruebe con el usuario 'lvv' y la contrasenia '123'" );
         GUI gui = new GUI(System.in);
         Inspector inspector;
         
@@ -75,11 +78,13 @@ public class Main {
         } while ( inspector == null );
         
         String ingresado = "";
-        ArrayList<String> salir = new ArrayList<>(1);
-        salir.add("6");
+        
         Map<String, IGUIAdapter> adapters = new HashMap();
         
         adapters.put("1.1", new AltaAutoGUI(gui));
+        adapters.put("1.2", new AltaInspectorGUI(gui));
+        adapters.put("1.3", new AltaInspeccionGUI(gui));
+        
         
         adapters.put("2.1", new BorradoStringGUI( new AutoCRUD(), gui ));
         adapters.put("2.2", new BorradoLongGUI( new InspectorCRUD(), gui ));
@@ -87,28 +92,34 @@ public class Main {
         adapters.put("2.4", new BorradoLongGUI( new PropietarioCRUD(), gui ));
         
         adapters.put("3.1", new ModificacionAutoGUI(gui));
+        adapters.put("3.2", new ModificacionInspectorGUI(gui));
+        adapters.put("3.3", new AltaInspeccionGUI(gui));
         
         adapters.put("4.1", new LecturaGUI( new AutoCRUD(), gui ));
         adapters.put("4.2", new LecturaGUI( new InspectorCRUD(), gui ));
         adapters.put("4.3", new LecturaGUI( new InspeccionCRUD(), gui ));
         adapters.put("4.4", new LecturaGUI( new PropietarioCRUD(), gui ));
         
-        
         IGUIAdapter opcion;
         
-        while ( !gui.chequearOpcion(ingresado, salir) ) {
+        while ( true ) {
             menu(gui);
             
             ingresado = gui.leerString("Ingrese su opción");
             opcion = adapters.get(ingresado);
             
-            if ( opcion == null && ingresado != "6" )
+            if ( opcion == null && !ingresado.equals("6") )
                 System.out.println("NO INGRESÓ UNA OPCIÓN CORRECTA");
             
             if ( opcion != null )
                 opcion.realizar();
             
-            gui.leerString("Ingrese cualquier tecla y Enter para continuar");
+            if ( !ingresado.equals("6") )
+                gui.leerString("Ingrese cualquier tecla y Enter para continuar");
+            
+            if ( ingresado.equals("6") )
+                return;
+            
         }
         
     }

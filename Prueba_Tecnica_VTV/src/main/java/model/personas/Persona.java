@@ -108,10 +108,10 @@ public abstract class Persona<T extends Persona> {
         
         json.put( "CUIL" , this.CUIL );
         json.put( "Nombre" , this.nombre );
-        json.put( "Apellido" , this.nombre );
-        json.put( "Fecha_Nacimiento" , this.nombre );
-        json.put( "Email" , this.nombre );
-        json.put( "Nro_Telefono" , this.nombre );
+        json.put( "Apellido" , this.apellido );
+        json.put( "Fecha_Nacimiento" , this.fechaNac.toString() );
+        json.put( "Email" , this.email );
+        json.put( "Nro_Telefono" , this.NroTelefono );
         
         return json.toString(4);
     }
