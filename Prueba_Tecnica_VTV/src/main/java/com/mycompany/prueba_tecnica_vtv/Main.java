@@ -3,13 +3,16 @@ package com.mycompany.prueba_tecnica_vtv;
 import com.mycompany.prueba_tecnica_vtv.gui.AltaAutoGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.AltaInspeccionGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.AltaInspectorGUI;
+import com.mycompany.prueba_tecnica_vtv.gui.AltaPropietarioGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.BorradoLongGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.BorradoStringGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.GUI;
 import com.mycompany.prueba_tecnica_vtv.gui.IGUIAdapter;
 import com.mycompany.prueba_tecnica_vtv.gui.LecturaGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.ModificacionAutoGUI;
+import com.mycompany.prueba_tecnica_vtv.gui.ModificacionInspeccionGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.ModificacionInspectorGUI;
+import com.mycompany.prueba_tecnica_vtv.gui.ModificacionPropietarioGUI;
 import java.util.HashMap;
 import java.util.Map;
 import model.CRUD.AutoCRUD;
@@ -84,7 +87,7 @@ public class Main {
         adapters.put("1.1", new AltaAutoGUI(gui));
         adapters.put("1.2", new AltaInspectorGUI(gui));
         adapters.put("1.3", new AltaInspeccionGUI(gui));
-        
+        adapters.put("1.4", new AltaPropietarioGUI(gui));        
         
         adapters.put("2.1", new BorradoStringGUI( new AutoCRUD(), gui ));
         adapters.put("2.2", new BorradoLongGUI( new InspectorCRUD(), gui ));
@@ -93,7 +96,8 @@ public class Main {
         
         adapters.put("3.1", new ModificacionAutoGUI(gui));
         adapters.put("3.2", new ModificacionInspectorGUI(gui));
-        adapters.put("3.3", new AltaInspeccionGUI(gui));
+        adapters.put("3.3", new ModificacionInspeccionGUI(gui));
+        adapters.put("3.4", new ModificacionPropietarioGUI(gui));
         
         adapters.put("4.1", new LecturaGUI( new AutoCRUD(), gui ));
         adapters.put("4.2", new LecturaGUI( new InspectorCRUD(), gui ));

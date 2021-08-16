@@ -57,10 +57,11 @@ public class ModificacionInspectorGUI implements IGUIAdapter {
                     .setEmail(email)
                     .setNroTelefono(nroTelefono)
                     .setUsuario(usuario)
-                    .setContrasenia(contrasenia);
+                    .setContrasenia(contrasenia)
+                    .setFechaNac(LocalDate.parse(fecha, DateTimeFormatter.ofPattern("2001-06-18")).atStartOfDay());
             
             if ( this.crud.update(inspector) == null ) {
-                System.out.println("NO SE CREÓ EL INSPECTOR. FIN DEL PROCESO.");
+                System.out.println("NO SE MODIFICÓ EL INSPECTOR. FIN DEL PROCESO.");
                 return;
             }
             System.out.println ( "SE CREÓ CON EXITO!" );
