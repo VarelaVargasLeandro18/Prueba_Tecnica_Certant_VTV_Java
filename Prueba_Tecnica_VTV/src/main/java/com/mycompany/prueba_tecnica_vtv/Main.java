@@ -8,6 +8,11 @@ import com.mycompany.prueba_tecnica_vtv.gui.BorradoLongGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.BorradoStringGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.GUI;
 import com.mycompany.prueba_tecnica_vtv.gui.IGUIAdapter;
+import com.mycompany.prueba_tecnica_vtv.gui.InformeCinco;
+import com.mycompany.prueba_tecnica_vtv.gui.InformeCuatro;
+import com.mycompany.prueba_tecnica_vtv.gui.InformeDos;
+import com.mycompany.prueba_tecnica_vtv.gui.InformeTres;
+import com.mycompany.prueba_tecnica_vtv.gui.InformeUno;
 import com.mycompany.prueba_tecnica_vtv.gui.LecturaGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.ModificacionAutoGUI;
 import com.mycompany.prueba_tecnica_vtv.gui.ModificacionInspeccionGUI;
@@ -65,7 +70,9 @@ public class Main {
                 + "sus datos y si tiene más de un auto mostrar los datos de las "
                 + "inspecciones realizadas en planta");
         System.out.print("\t");
-        gui.imprimirOpcion(opcion + ".4", "Consultar inspecciones vencidas");
+        gui.imprimirOpcion(opcion + ".4", "Consultar AUTOS con inspecciones vencidas");
+        System.out.print("\t");
+        gui.imprimirOpcion(opcion + ".5", "Lista de autos Aptos, Condicionales y Rechazados");
     }
     
     /**
@@ -103,6 +110,12 @@ public class Main {
         adapters.put("4.2", new LecturaGUI( new InspectorCRUD(), gui ));
         adapters.put("4.3", new LecturaGUI( new InspeccionCRUD(), gui ));
         adapters.put("4.4", new LecturaGUI( new PropietarioCRUD(), gui ));
+        
+        adapters.put("5.1", new InformeUno());
+        adapters.put("5.2", new InformeDos());
+        adapters.put("5.3", new InformeTres(gui));
+        adapters.put("5.4", new InformeCuatro());
+        adapters.put("5.5", new InformeCinco());
         
         IGUIAdapter opcion;
         

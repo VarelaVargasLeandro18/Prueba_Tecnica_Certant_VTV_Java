@@ -1,13 +1,7 @@
 package model.CRUD;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.TemporalType;
 import model.CRUD.abstractCRUD.AbstractCRUD;
 import model.CRUD.abstractCRUD.ReadEntityException;
 import model.inspeccion.Inspeccion;
@@ -21,27 +15,6 @@ public final class InspeccionCRUD extends AbstractCRUD<Inspeccion, Long> {
     
     public InspeccionCRUD() {
         super(Inspeccion.class);
-    }
-    
-    /**
-     * Primer Informe - Obtención de Lista de las Inspecciones en la última semana,
-     * es decir, desde hace siete días del día de la fecha hasta hoy.
-     * @return List inspecciones en la semana.
-     * @throws model.CRUD.abstractCRUD.ReadEntityException
-     */
-    public List<Inspeccion> obtenerInspeccionesDeLaSemana() throws ReadEntityException {
-        try {            
-            String query = "SELECT I FROM Inspeccion I "
-                    + "WHERE I.fecha "
-                    + "BETWEEN :sietediasatras "
-                    + "AND :ahora";
-            return this.getEntityManager().createQuery(query, Inspeccion.class)
-                    .setParameter("ahora", LocalDateTime.now())
-                    .setParameter("sietediasatras", LocalDateTime.now().minusDays(7l))
-                    .getResultList();
-        } catch ( Throwable ex ) {
-            throw new ReadEntityException(ex);
-        }
     }
     
     /**
