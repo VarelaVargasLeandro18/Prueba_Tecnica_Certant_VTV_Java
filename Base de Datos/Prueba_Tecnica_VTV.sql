@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-08-2021 a las 15:04:31
+-- Tiempo de generación: 16-08-2021 a las 14:22:51
 -- Versión del servidor: 8.0.26-0ubuntu0.21.04.3
 -- Versión de PHP: 8.0.3
 
@@ -55,6 +55,7 @@ INSERT INTO `AUTOMOVILES` (`dominio`, `marca`, `modelo`, `propietario_CUIL`) VAL
 ('CDD 322', 'Marca', 'Modelo', 54339643956),
 ('LOZ 076', 'Marca', 'Modelo', 44904569490),
 ('LPO 999', 'Marca', 'Modelo', 34689459546),
+('MOA 589', 'Juanete', 'Pimiento', 8458293459),
 ('MZZ 950', 'Marca', 'Modelo', 8458293459),
 ('ZKO 111', 'Marca', 'Modelo', 29345449990),
 ('ZPQ 431', 'Marca', 'Modelo', 546789456092),
@@ -104,9 +105,27 @@ CREATE TABLE `INSPECCIONES` (
 --
 
 INSERT INTO `INSPECCIONES` (`numero`, `fecha`, `estado`, `auto_inspeccionado`, `inspector`, `medicion`, `observacion`, `exento`) VALUES
-(1, '2021-08-11 09:32:43.000000', 1, 'AA 219 AV', 32303555239, 1, 1, 'Comun'),
-(8, '2021-08-12 09:31:40.000000', 2, 'AA 219 AV', 15405679340, 2, 1, 'Exento'),
-(9, '2021-08-09 09:33:38.000000', 1, 'AA 493 AC', 20594039401, 5, 2, 'Comun');
+(1, '2021-08-15 09:32:43.000000', 1, 'AA 219 AV', 32303555239, 1, 1, 'Comun'),
+(8, '2021-08-11 04:31:40.000000', 2, 'AA 219 AV', 15405679340, 2, 1, 'Exento'),
+(9, '2021-08-09 09:33:38.000000', 1, 'AA 493 AC', 20594039401, 5, 2, 'Comun'),
+(11, '2020-08-01 11:10:06.000000', 1, 'AA 495 BD', 20594039401, 1, 1, 'Comun'),
+(12, '2021-08-14 11:48:17.000000', 3, 'LOZ 076', 32303555239, 25, 13, 'Exento'),
+(13, '2021-08-16 10:23:00.514432', 1, 'MOA 589', 20434598886, NULL, NULL, 'Comun'),
+(14, '2020-09-28 08:56:12.000000', 1, 'AB 000 AA', 20434598886, 10, 8, 'Exento'),
+(15, '2020-04-19 08:56:12.000000', 3, 'AB 493 LZ', 15405679340, 16, 8, 'Exento'),
+(16, '2021-02-19 09:00:12.000000', 2, 'AB 903 CA', 32303555239, 15, 5, 'Exento'),
+(19, '2021-04-20 09:01:56.000000', 1, 'AC 234 CA', 20434598886, 14, 30, 'Exento'),
+(20, '2021-05-25 09:01:56.000000', 2, 'AD 130 JA', 32303555239, 7, 15, 'Exento'),
+(23, '2019-10-29 09:05:46.000000', 2, 'AE 012 PD', 29376545438, 12, 18, 'Exento'),
+(24, '2020-09-09 09:05:46.000000', 1, 'AE 234 DD', 20434598886, 12, 15, 'Exento'),
+(25, '2021-08-01 09:08:55.000000', 1, 'AE 954 AA', 29376545438, 11, 11, 'Exento'),
+(26, '2021-08-02 09:08:55.000000', 2, 'AGE 007', 15405679340, 5, 17, 'Comun'),
+(27, '2020-12-17 09:11:55.000000', 3, 'AQ 432 AD', 20434598886, 16, 5, 'Comun'),
+(28, '2020-03-19 09:11:55.000000', 1, 'CDD 322', 20434598886, 6, 23, 'Comun'),
+(29, '2021-03-30 09:17:01.000000', 2, 'LPO 999', 32303555239, 18, 2, 'Exento'),
+(30, '2020-09-16 09:17:01.000000', 3, 'MZZ 950', 20434598886, 27, 29, 'Comun'),
+(31, '2021-05-18 09:17:01.000000', 2, 'ZKO 111', 20434598886, 10, 3, 'Exento'),
+(32, '2020-02-05 09:17:01.000000', 1, 'ZPQ 431', 20434598886, 1, 1, 'Exento');
 
 -- --------------------------------------------------------
 
@@ -131,6 +150,7 @@ CREATE TABLE `INSPECTORES` (
 
 INSERT INTO `INSPECTORES` (`CUIL`, `nro_telefono`, `apellido`, `email`, `fecha_nacimiento`, `nombre`, `contrasenia`, `usuario`) VALUES
 (15405679340, '+54 1111111111', 'Suarez', 'mail@mail.com', '1996-05-21 01:58:27.000000', 'Pedro', '123', 'pedros'),
+(20434598886, '+54 11111111111', 'Varela Vargas', 'lean@mail.com', '2001-06-18 03:00:00.000000', 'Leandro Gaston', '123', 'lvv'),
 (20594039401, '+54 1111111111', 'Martinez', 'mail@mail.com', '1990-05-02 02:01:37.000000', 'Alberto', '123', 'albertom'),
 (29376545438, '+54 1111111111', 'Perez', 'mail@mail.com', '1989-10-18 01:58:27.000000', 'Juan', '123', 'juanp'),
 (32303555239, '+54 1111111111', 'Gutierrez', 'mail@mail.com', '2000-02-29 02:01:37.000000', 'Lucas', '123', 'lucasg');
@@ -380,25 +400,25 @@ ALTER TABLE `ESTADOS_INSPECCION`
 -- AUTO_INCREMENT de la tabla `INSPECCIONES`
 --
 ALTER TABLE `INSPECCIONES`
-  MODIFY `numero` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `numero` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `MEDICIONES`
 --
 ALTER TABLE `MEDICIONES`
-  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `OBSERVACIONES`
 --
 ALTER TABLE `OBSERVACIONES`
-  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `TIPOS_PROPIETARIO`
 --
 ALTER TABLE `TIPOS_PROPIETARIO`
-  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
